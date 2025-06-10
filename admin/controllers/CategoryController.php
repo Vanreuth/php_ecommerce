@@ -3,14 +3,14 @@ ob_start(); // Start output buffering
 session_start(); // Start session
 
 require_once __DIR__ . '/../config/database.php';
-require_once __DIR__ . '/../models/Brand.php';
+require_once __DIR__ . '/../models/Category.php';
 
-class BrandController {
-    private $brandModel;
+class CategoryController {
+    private $categoryModel;
 
     public function __construct() {
         $pdo = Database::connect();
-        $this->brandModel = new Brand($pdo);
+        $this->categoryModel = new Category($pdo);
     }
 
     public function handleRequest() {
@@ -21,13 +21,13 @@ class BrandController {
             try {
                 switch ($action) {
                     case 'add':
-                        $this->addBrand();
+                        $this->addCategory();
                         break;
                     case 'update':
-                        $this->updateBrand();
+                        $this->updateCategory();
                         break;
                     case 'delete':
-                        $this->deleteBrand();
+                        $this->deleteCategory();
                         break;
                     default:
                         throw new Exception('Invalid action');
@@ -37,21 +37,13 @@ class BrandController {
                 $_SESSION['error'] = $e->getMessage();
             }
 
-            // Redirect back to the brand management page
-            header('Location: /eccommerce/admin/?p=brand');
+            // Redirect back to the category management page
+            header('Location: /eccommerce/admin/?p=category');
             exit;
         }
-
-        $action = $_GET['action'] ?? null;
-        if ($action === 'getBrands') {
-            $stmt = $pdo->query("SELECT id, name FROM brands");
-            echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
-            exit();
-        }
     }
 
-    private function addBrand() {
-
+    private function addCategory() {
 
         $data = [
             'name' => $this->validateInput($_POST['name']),
@@ -59,19 +51,19 @@ class BrandController {
         ];
 
         if (empty($data['name'])) {
-            throw new Exception('Brand name is required');
+            throw new Exception('Category name is required');
         }
 
-        if (!$this->brandModel->addBrand($data)) {
-            throw new Exception('Failed to add brand');
+        if (!$this->categoryModel->addCategory($data)) {
+            throw new Exception('Failed to add category');
         }
     }
 
-    private function updateBrand() {
+    private function updateCategory() {
 
         $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
         if (!$id) {
-            throw new Exception('Invalid brand ID');
+            throw new Exception('Invalid category ID');
         }
 
         $data = [
@@ -80,24 +72,23 @@ class BrandController {
         ];
 
         if (empty($data['name'])) {
-            throw new Exception('Brand name is required');
+            throw new Exception('Category name is required');
         }
 
-        if (!$this->brandModel->updateBrand($id, $data)) {
-            throw new Exception('Failed to update brand');
+        if (!$this->categoryModel->updateCategory($id, $data)) {
+            throw new Exception('Failed to update category');
         }
     }
 
-    private function deleteBrand() {
-
+    private function deleteCategory() {
 
         $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
         if (!$id) {
-            throw new Exception('Invalid brand ID');
+            throw new Exception('Invalid category ID');
         }
 
-        if (!$this->brandModel->deleteBrand($id)) {
-            throw new Exception('Failed to delete brand');
+        if (!$this->categoryModel->deleteCategory($id)) {
+            throw new Exception('Failed to delete category');
         }
     }
 
@@ -110,5 +101,6 @@ class BrandController {
 }
 
 // Initialize and handle request
-$controller = new BrandController();
+$controller = new CategoryController();
 $controller->handleRequest();
+?> 

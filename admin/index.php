@@ -1,8 +1,11 @@
 <?php
+ob_start(); // Start output buffering
 session_start();
 require_once './config/database.php';
 require_once './models/Page.php';
 require_once './controllers/PageController.php';
+
+$pdo = Database::connect(); 
 
 if (!isset($_SESSION['user'])) {
     header('Location: views/login.php');
@@ -10,26 +13,26 @@ if (!isset($_SESSION['user'])) {
 }
 
 $user = $_SESSION['user'];
-$page = "./views/dashboard.php";  // Default page
+$page = "./views/dashboard.php"; 
 
 if (isset($_GET['p'])) {
     $p = $_GET['p'];
 
     switch ($p) {
         case "usermagement":
-            $page = "./views/usermagement.php";
+            $page = "./views/user/list.php";
             break;
         case "product":
-            $page = "./views/product.php";
+            $page = "./views/product/list.php";
             break;
         case "category":
-            $page = "./views/category.php";
+            $page = "./views/category/list.php";
             break;
         case "brand":
-            $page = "./views/brand.php";
+            $page = "./views/brand/list.php";
             break;
         case "order":
-            $page = "./views/order.php";
+            $page = "./views/order/list.php";
             break;
             case "pages": // Case for managing About & Contact pages
                 if (isset($_GET['action']) && isset($_GET['title'])) {

@@ -1,6 +1,9 @@
 <?php
+session_start();
 require_once '../models/User.php';
 require_once '../config/database.php';
+
+$pdo = Database::connect();
 
 class AuthController {
     private $userModel;
@@ -8,6 +11,26 @@ class AuthController {
     public function __construct() {
         global $pdo;
         $this->userModel = new User($pdo);
+    }
+
+    public function login() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            $user = $this->userModel->login($email, $password);
+
+            if ($user) {
+                $_SESSION['user'] = $user;
+                $_SESSION['success'] = "Login successful!";
+                header('Location: ../index.php');
+                exit();
+            } else {
+                $_SESSION['error'] = "Invalid email or password.";
+                header('Location: ../views/login.php');
+                exit();
+            }
+        }
     }
 
     public function register() {
@@ -19,85 +42,36 @@ class AuthController {
             $password = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
 
-            // Validate input
-            $errors = [];
-
-            if (empty($name)) {
-                $errors[] = "Name is required";
-            }
-
-            if (empty($email)) {
-                $errors[] = "Email is required";
-            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors[] = "Invalid email format";
-            }
-
-            if (empty($phone)) {
-                $errors[] = "Phone number is required";
-            }
-
-            if (empty($address)) {
-                $errors[] = "Address is required";
-            }
-
-            if (empty($password)) {
-                $errors[] = "Password is required";
-            } elseif (strlen($password) < 6) {
-                $errors[] = "Password must be at least 6 characters long";
-            }
-
+            // Validate password match
             if ($password !== $confirm_password) {
-                $errors[] = "Passwords do not match";
+                $_SESSION['error'] = "Passwords do not match.";
+                header('Location: ../views/register.php');
+                exit();
             }
 
-            if (empty($errors)) {
-                if ($this->userModel->register($name, $email, $phone, $address, $password)) {
-                    // Registration successful
-                    $_SESSION['success'] = "Registration successful! Please login.";
-                    header('Location: ../views/login.php');
-                    exit();
-                } else {
-                    $errors[] = "Email already exists";
-                }
-            }
+            // Try to register
+            $result = $this->userModel->register($name, $email, $phone, $address, $password);
 
-            if (!empty($errors)) {
-                $_SESSION['errors'] = $errors;
+            if ($result) {
+                $_SESSION['success'] = "Registration successful! Please login.";
+                header('Location: ../views/login.php');
+                exit();
+            } else {
+                $_SESSION['error'] = "Email already exists or registration failed.";
                 header('Location: ../views/register.php');
                 exit();
             }
         }
     }
 
-    public function login() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-
-            $user = $this->userModel->login($email, $password);
-
-            if ($user) {
-                session_start();
-                $_SESSION['user'] = $user;
-                header('Location: ../index.php');
-                exit();
-            } else {
-                $_SESSION['error'] = "Invalid email or password.";
-                header('Location: ../views/login.php');
-                exit();
-            }
-        }
-    }
-
     public function logout() {
-        session_start();
         session_destroy();
         header('Location: ../views/login.php');
         exit();
     }
 }
 
-// Handle actions
+// Handle the incoming request
 $action = isset($_GET['action']) ? $_GET['action'] : 'login';
 $authController = new AuthController();
 

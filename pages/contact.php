@@ -1,6 +1,6 @@
 <?php
 require_once './admin/controllers/PageController.php';
-require_once './admin/config/database.php';
+require_once './admin/config/databases.php';
 
 // Instantiate the PageController
 $pageController = new PageController($pdo);
