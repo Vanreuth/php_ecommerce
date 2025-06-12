@@ -1,5 +1,5 @@
 <?php
-require_once 'config/databases.php';
+require_once './admin/config/database.php';
 class Slider {
     private $db;
     public function __construct() {

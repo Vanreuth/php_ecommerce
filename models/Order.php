@@ -1,5 +1,5 @@
 <?php
-require_once 'config/database.php';
+require_once './admin/config/database.php';
 
 class Order {
     private $db;
