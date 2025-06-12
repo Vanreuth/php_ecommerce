@@ -23,6 +23,9 @@ if (!$cartIsEmpty) {
     }
 }
 ?>
+    <!-- PayPal SDK - Load this first -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AVWfc9_4U_NIBAWBa6nDkHyt2mzokJv4na1uXS4nLy_YN_gfLRJLS3ID3YFqKGdla2DpAMSUPGM9YH5u&currency=USD"></script>
+
     <!-- Breadcrumb -->
     <div class="container">
         <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-90 p-lr-0-lg">
@@ -154,6 +157,13 @@ if (!$cartIsEmpty) {
                             </div>
                         </div>
 
+                        <!-- PayPal Button Container -->
+                        <div id="paypal-button-container" class="m-b-30"></div>
+
+                        <div class="text-center m-b-20">
+                            <span class="stext-110 cl2">- OR -</span>
+                        </div>
+
                         <!-- Payment Form -->
                         <div id="payment-form" class="p-t-20">
                             <h4 class="mtext-109 cl2 p-b-20">Payment Information</h4>
@@ -216,6 +226,56 @@ if (!$cartIsEmpty) {
     <!-- JavaScript for AJAX -->
     <script>
     document.addEventListener('DOMContentLoaded', function () {
+        // PayPal Button Configuration
+        if (typeof paypal !== 'undefined') {
+            const totalAmount = <?= json_encode(number_format($totalPrice, 2, '.', '')); ?>;
+            
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: totalAmount
+                            }
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        // Send the PayPal transaction details to your server
+                        return fetch('./process/process_paypal.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                orderID: data.orderID,
+                                payerID: data.payerID,
+                                paymentID: details.id,
+                                paymentStatus: details.status
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Payment completed successfully! Order ID: ' + data.order_id);
+                                window.location.href = 'index.php?p=home';
+                            } else {
+                                alert('There was a problem processing your payment. Please try again.');
+                            }
+                        });
+                    });
+                },
+                onError: function(err) {
+                    console.error('PayPal error:', err);
+                    alert('There was an error processing your PayPal payment. Please try again.');
+                }
+            }).render('#paypal-button-container');
+        } else {
+            console.error('PayPal SDK not loaded');
+            document.getElementById('paypal-button-container').innerHTML = '<p class="text-danger">PayPal payment is currently unavailable. Please try again later.</p>';
+        }
+
         // Add event listeners to all quantity buttons
         document.querySelectorAll('.btn-num-product-up, .btn-num-product-down').forEach(button => {
             button.addEventListener('click', function () {
