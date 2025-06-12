@@ -1,7 +1,18 @@
 <?php
-
+session_start();
 $page = "./pages/home.php";
 $p="home";
+
+// Handle cart actions
+if(isset($_GET['action']) && $_GET['action'] === 'remove' && isset($_GET['product_id'])) {
+    $product_id = $_GET['product_id'];
+    if(isset($_SESSION['cart'][$product_id])) {
+        unset($_SESSION['cart'][$product_id]);
+    }
+    header("Location: index.php?p=cart");
+    exit;
+}
+
 if(isset($_GET['p']))
 {
     $p = $_GET['p'];

@@ -195,7 +195,7 @@ if ($roleFilter) {
 <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="POST">
+            <form method="POST" action="/eccommerce/admin/controllers/UserController.php" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="id" id="edit_id">
                 <div class="modal-header">
@@ -247,7 +247,7 @@ if ($roleFilter) {
 <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="POST">
+            <form method="POST" action="/eccommerce/admin/controllers/UserController.php" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="toggle">
                 <input type="hidden" name="id" id="status_user_id">
                 <div class="modal-header">
@@ -272,7 +272,7 @@ if ($roleFilter) {
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="POST">
+            <form method="POST" action="/eccommerce/admin/controllers/UserController.php" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="delete">
                 <input type="hidden" name="id" id="delete_user_id">
                 <div class="modal-header">

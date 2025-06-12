@@ -1,9 +1,15 @@
 <?php 
-// Check if the cart is empty
-if (!isset($_SESSION['cart']) || empty($_SESSION['cart']));
+// Initialize cart if it doesn't exist
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
+// Calculate total price
 $totalPrice = 0;
-foreach ($_SESSION['cart'] as $product) {
-    $totalPrice += $product['price'] * $product['quantity'];
+if (!empty($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $product) {
+        $totalPrice += $product['price'] * $product['quantity'];
+    }
 }
 ?>
 <div class="header-cart flex-col-l p-l-65 p-r-25">
@@ -19,25 +25,31 @@ foreach ($_SESSION['cart'] as $product) {
 			
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
-					<li class="header-cart-item flex-w flex-t m-b-12">
-					<?php foreach ($_SESSION['cart'] as $productId => $product): ?>
-						<div class="header-cart-item-img">
-						<img src="./admin/<?= htmlspecialchars($product['image']); ?>" alt="IMG">
-						</div>
+					<?php if (!empty($_SESSION['cart'])): ?>
+						<?php foreach ($_SESSION['cart'] as $productId => $product): ?>
+						<li class="header-cart-item flex-w flex-t m-b-12">
+							<div class="header-cart-item-img">
+							<img src="./admin/<?= htmlspecialchars($product['image']); ?>" alt="IMG">
+							</div>
 
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-							<?= htmlspecialchars($product['name']); ?>
-							</a>
+							<div class="header-cart-item-txt p-t-8">
+								<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								<?= htmlspecialchars($product['name']); ?>
+								</a>
 
-							<span class="header-cart-item-info">
-							<?= htmlspecialchars($product['quantity']); ?> x $<?= htmlspecialchars($product['price']); ?>
-							</span>
-						</div>
+								<span class="header-cart-item-info">
+								<?= htmlspecialchars($product['quantity']); ?> x $<?= htmlspecialchars($product['price']); ?>
+								</span>
+							</div>
+						</li>
 						<?php endforeach; ?>
-					</li>
-
-
+					<?php else: ?>
+						<li class="header-cart-item flex-w flex-t m-b-12">
+							<div class="header-cart-item-txt p-t-8">
+								<span class="header-cart-item-info">Your cart is empty</span>
+							</div>
+						</li>
+					<?php endif; ?>
 				</ul>
 				
 				<div class="w-full">

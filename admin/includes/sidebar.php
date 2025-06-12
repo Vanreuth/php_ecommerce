@@ -63,6 +63,13 @@
                   <i class="fas fa-shopping-bag"></i>
                   <p>Order</p>
                 </a>
+                </li>
+                <li class="nav-item">
+                <a href="index.php?p=sliders">
+                  <i class="fas fa-images"></i>
+                  <p>Sliders</p>
+                </a>
+                </li>
                 <li class="nav-item">
                 <a href="index.php?p=pages&action=edit&title=About">
                 <i class="fa fa-info-circle"></i>

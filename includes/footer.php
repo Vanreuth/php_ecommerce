@@ -72,7 +72,7 @@
 					</h4>
 
 					<p class="stext-107 cl7 size-201">
-						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+						Any questions? Let us know in store at 8th floor, 192 Street,Phnom Penh, Cambodia or call us on (+855) 96 716 6879
 					</p>
 
 					<div class="p-t-27">
@@ -135,7 +135,7 @@
 
 				<p class="stext-107 cl6 txt-center">
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by Heng Vanreuth</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
 				</p>
@@ -329,24 +329,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="./assets/vendor/slick/slick.min.js"></script>
 	<script src="./assets/js/slick-custom.js"></script>
 <!--===============================================================================================-->
-	<!-- <script src="vendor/parallax100/parallax100.js"></script>
-	<script>
-        $('.parallax100').parallax100();
-	</script>
-===============================================================================================-->
-	<!-- <script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>  -->
-	<!-- <script>
-		$('.gallery-lb').each(function() { // the containers for all your galleries
-			$(this).magnificPopup({
-		        delegate: 'a', // the selector for gallery item
-		        type: 'image',
-		        gallery: {
-		        	enabled:true
-		        },
-		        mainClass: 'mfp-fade'
-		    });
-		});
-	</script> -->
+	<script src="./assets/vendor/parallax100/parallax100.js"></script>
+<!--===============================================================================================-->
+	<script src="./assets/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <!--===============================================================================================-->
 	<script src="./assets/vendor/isotope/isotope.pkgd.min.js"></script>
 <!--===============================================================================================-->
@@ -406,6 +391,25 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</script>
 <!--===============================================================================================-->
 	<script src="./assets/js/main.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		// Initialize Slick slider
+		if ($('.slick1').length) {
+			$('.slick1').slick({
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				fade: true,
+				dots: true,
+				autoplay: true,
+				autoplaySpeed: 6000,
+				arrows: true,
+				prevArrow: '<button class="arrow-slick1 prev-slick1"><i class="zmdi zmdi-caret-left"></i></button>',
+				nextArrow: '<button class="arrow-slick1 next-slick1"><i class="zmdi zmdi-caret-right"></i></button>',
+			});
+		}
+	});
+</script>
 
 </body>
 </html>

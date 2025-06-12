@@ -1,5 +1,5 @@
 <?php
-require_once 'config/database.php';
+require_once 'config/databases.php';
 
 class Product {
     private $db;

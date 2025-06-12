@@ -1,32 +1,26 @@
 <?php
-require_once './admin/controllers/PageController.php';
-require_once './admin/config/databases.php';
+require_once 'controllers/PageController.php';
+
 
 // Instantiate the PageController
-$pageController = new PageController($pdo);
+$pageController = new PageController();
 
 // Fetch the Contact page content from the database
-$pageData = $pageController->getPage('Contact'); // Get content by title
-
-$title = $pageData['title'];
-$address = $pageData['address'];
-$phone = $pageData['phone'];
-$email = $pageData['email'];
+$pageData = $pageController->getPage('Contact');
 ?>
 
 <!-- Title page -->
-<section class="bg-img1 txt-center p-lr-15 p-tb-92 herder-v4" 
-         style="background-image: url('./admin/views/pages/uploads/<?= htmlspecialchars($pageData['banner_image']) ?>');">
-    <h2 class="ltext-105 cl0 txt-center"><?= htmlspecialchars($title) ?></h2>
+<section class="bg-img1 txt-center p-lr-15 p-tb-92 herder-v4 m-t-80" 
+         style="background-image: url('./admin/views/pages/uploads/<?= htmlspecialchars($pageData['banner_image']) ?>'); height: 350px; background-size: cover; background-position: center;">
+    <h2 class="ltext-105 cl0 txt-center"><?= htmlspecialchars($pageData['title']) ?></h2>
 </section>
-
 
 <!-- Content page -->
 <section class="bg0 p-t-104 p-b-116">
     <div class="container">
         <div class="flex-w flex-tr">
             <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
-                <form action="contact_submit.php" method="POST">  <!-- Added action and method -->
+                <form action="process/contact_submit.php" method="POST">
                     <h4 class="mtext-105 cl2 txt-center p-b-30">
                         Send Us A Message
                     </h4>
@@ -53,7 +47,7 @@ $email = $pageData['email'];
                     <div class="size-212 p-t-2">
                         <span class="mtext-110 cl2">Address</span>
                         <p class="stext-115 cl6 size-213 p-t-18">
-                            <?= htmlspecialchars($address) ?>  <!-- Dynamic Address -->
+                            <?= htmlspecialchars($pageData['address']) ?>
                         </p>
                     </div>
                 </div>
@@ -65,7 +59,7 @@ $email = $pageData['email'];
                     <div class="size-212 p-t-2">
                         <span class="mtext-110 cl2">Let's Talk</span>
                         <p class="stext-115 cl1 size-213 p-t-18">
-                            <?= htmlspecialchars($phone) ?>  <!-- Dynamic Phone -->
+                            <?= htmlspecialchars($pageData['phone']) ?>
                         </p>
                     </div>
                 </div>
@@ -77,7 +71,7 @@ $email = $pageData['email'];
                     <div class="size-212 p-t-2">
                         <span class="mtext-110 cl2">Sale Support</span>
                         <p class="stext-115 cl1 size-213 p-t-18">
-                            <?= htmlspecialchars($email) ?>  <!-- Dynamic Email -->
+                            <?= htmlspecialchars($pageData['email']) ?>
                         </p>
                     </div>
                 </div>

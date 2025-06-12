@@ -34,26 +34,29 @@ if (isset($_GET['p'])) {
         case "order":
             $page = "./views/order/list.php";
             break;
-            case "pages": // Case for managing About & Contact pages
-                if (isset($_GET['action']) && isset($_GET['title'])) {
-                    $pageController = new PageController($pdo);
-            
-                    $action = $_GET['action'];
-                    $title = $_GET['title'];
-            
-                    if ($action === 'edit') {
-                        if ($title === "About") {
-                            $page = "./views/pages/edit_about.php";  // Load About Edit Page
-                        } elseif ($title === "Contact") {
-                            $page = "./views/pages/edit_contact.php";  // Load Contact Edit Page
-                        } else {
-                            $page = "./views/pages/view.php";  // Default View Page
-                        }
+        case "sliders":
+            $page = "./views/sliders/list.php";
+            break;
+        case "pages": // Case for managing About & Contact pages
+            if (isset($_GET['action']) && isset($_GET['title'])) {
+                $pageController = new PageController($pdo);
+        
+                $action = $_GET['action'];
+                $title = $_GET['title'];
+        
+                if ($action === 'edit') {
+                    if ($title === "About") {
+                        $page = "./views/pages/edit_about.php";  // Load About Edit Page
+                    } elseif ($title === "Contact") {
+                        $page = "./views/pages/edit_contact.php";  // Load Contact Edit Page
                     } else {
                         $page = "./views/pages/view.php";  // Default View Page
                     }
+                } else {
+                    $page = "./views/pages/view.php";  // Default View Page
                 }
-                break;
+            }
+            break;
             
         default:
             $page = "./views/dashboard.php";

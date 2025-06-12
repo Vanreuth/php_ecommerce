@@ -1,18 +1,23 @@
+<?php
+require_once 'controllers/SilderController.php';
+$sliderController = new SliderController();
+$sliders = $sliderController->index();
+?>
+
 <section class="section-slide">
 		<div class="wrap-slick1">
 			<div class="slick1">
-				<div class="item-slick1" style="background-image: url(./assets/images/silder1.webp);">
+				<div class="item-slick1" style="background-image: url(./admin/uploads/sliders/<?php echo htmlspecialchars($sliders[0]['image_path']); ?>);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
 								<span class="ltext-101 cl2 respon2">
-									Man Collection 2025
+									<?php echo $sliders[0]['title']; ?>
 								</span>
-							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
 								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-									NEW SEASON
+									<?php echo $sliders[0]['description']; ?>
 								</h2>
 							</div>
 								
@@ -25,18 +30,18 @@
 					</div>
 				</div>
 
-				<div class="item-slick1" style="background-image: url(./assets/images/slide-04.jpg);">
+				<div class="item-slick1" style="background-image: url(./admin/uploads/sliders/<?php echo htmlspecialchars($sliders[1]['image_path']); ?>);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
 								<span class="ltext-101 cl2 respon2">
-									Women New-Season
+									<?php echo $sliders[1]['title']; ?>
 								</span>
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
 								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-									Jackets & Coats
+									<?php echo $sliders[1]['description']; ?>
 								</h2>
 							</div>
 								

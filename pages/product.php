@@ -6,8 +6,7 @@ $products = $productController->index();
 $categoryId = isset($_GET['category']) ? $_GET['category'] : null;
 $products = $productController->index($categoryId);
 ?>
-<div class="bg0 m-t-54 p-b-140">
-
+<div class="bg0 m-t-100 p-b-140">
 
 	<div class="container">
 		<div class="flex-w flex-sb-m p-b-52">

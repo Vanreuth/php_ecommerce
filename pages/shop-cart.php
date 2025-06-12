@@ -1,22 +1,26 @@
 <?php
+
 // Start session at the top of the file
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 // Handle clearing the cart
 if (isset($_POST['clear_cart'])) {
     unset($_SESSION['cart']);
+    header("Location: index.php?p=cart");
     exit;
 }
+
+// Initialize total price
+$totalPrice = 0;
 
 // Check if the cart is empty
-if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
-    exit;
-}
+$cartIsEmpty = !isset($_SESSION['cart']) || empty($_SESSION['cart']);
 
-// Calculate total price
-$totalPrice = 0;
-foreach ($_SESSION['cart'] as $product) {
-    $totalPrice += $product['price'] * $product['quantity'];
+if (!$cartIsEmpty) {
+    // Calculate total price
+    foreach ($_SESSION['cart'] as $product) {
+        $totalPrice += $product['price'] * $product['quantity'];
+    }
 }
 ?>
     <!-- Breadcrumb -->
@@ -35,6 +39,11 @@ foreach ($_SESSION['cart'] as $product) {
     <!-- Shopping Cart -->
     <form class="bg0 p-t-75 p-b-85" method="POST" action="index.php?p=cart">
         <div class="container">
+            <?php if ($cartIsEmpty): ?>
+            <div class="alert alert-info text-center">
+                Your cart is empty. <a href="index.php?p=product" class="text-primary">Continue shopping</a>
+            </div>
+            <?php else: ?>
             <div class="row">
                 <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
                     <div class="m-l-25 m-r--38 m-lr-0-xl">
@@ -46,6 +55,7 @@ foreach ($_SESSION['cart'] as $product) {
                                     <th class="column-3">Price</th>
                                     <th class="column-4">Quantity</th>
                                     <th class="column-5">Total</th>
+                                    <th class="column-6">Action</th>
                                 </tr>
 
                                 <?php foreach ($_SESSION['cart'] as $productId => $product): ?>
@@ -78,6 +88,9 @@ foreach ($_SESSION['cart'] as $product) {
                                         <td class="column-5" id="total-<?= $productId; ?>">
                                             $<?= number_format($product['price'] * $product['quantity'], 2); ?>
                                         </td>
+                                        <td class="column-6">
+                                            <a href="index.php?p=cart&action=remove&product_id=<?= $productId; ?>" class="flex-c-m stext-101 cl2 size-100 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10" onclick="return confirm('Are you sure you want to remove this item from the cart?');">Remove</a>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </table>
@@ -85,7 +98,7 @@ foreach ($_SESSION['cart'] as $product) {
 
                         <!-- Clear Cart Button -->
                         <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-                            <form method="post" action="index.php?p=cart" style="display: inline;">
+                            <form method="post" action="index.php?p=cart&action=remove&product_id=<?= $productId; ?>" style="display: inline;">
                                 <input type="hidden" name="clear_cart" value="1">
                                 <button type="submit" class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
                                     Delete Cart
@@ -196,6 +209,7 @@ foreach ($_SESSION['cart'] as $product) {
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
         </div>
     </form>
 
