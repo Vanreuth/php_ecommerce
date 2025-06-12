@@ -58,7 +58,7 @@ $sliders = $sliderModel->getAllSliders();
                             <tr>
                                 <td><?= htmlspecialchars($slider['id']) ?></td>
                                 <td>
-                                    <img src="/eccommerce/admin/uploads/sliders/<?= htmlspecialchars($slider['image_path']) ?>" 
+                                    <img src="/admin/uploads/sliders/<?= htmlspecialchars($slider['image_path']) ?>" 
                                          alt="<?= htmlspecialchars($slider['title']) ?>" 
                                          class="img-thumbnail" 
                                          style="max-width: 100px;">
@@ -107,7 +107,7 @@ $sliders = $sliderModel->getAllSliders();
 <div class="modal fade" id="addSliderModal" tabindex="-1" aria-labelledby="addSliderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/eccommerce/admin/controllers/SliderController.php" method="POST" enctype="multipart/form-data">
+            <form action="/admin/controllers/SliderController.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="add">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addSliderModalLabel">Add New Slider</h5>
@@ -147,7 +147,7 @@ $sliders = $sliderModel->getAllSliders();
 <div class="modal fade" id="editSliderModal" tabindex="-1" aria-labelledby="editSliderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/eccommerce/admin/controllers/SliderController.php" method="POST" enctype="multipart/form-data">
+            <form action="/admin/controllers/SliderController.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="id" id="edit_slider_id">
                 <div class="modal-header">
@@ -188,7 +188,7 @@ $sliders = $sliderModel->getAllSliders();
 <!-- Delete Slider Modal -->
 <div class="modal fade" id="deleteSliderModal" tabindex="-1" aria-labelledby="deleteSliderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="/eccommerce/admin/controllers/SliderController.php" method="POST"> 
+        <form action="/admin/controllers/SliderController.php" method="POST"> 
         <input type="hidden" name="action" value="delete">
         <input type="hidden" name="id" id="delete_slider_id">
         <div class="modal-content">
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('edit_title').value = title;
             document.getElementById('edit_description').value = description;
             document.getElementById('edit_status').checked = status === '1';
-            document.getElementById('current_image').innerHTML = `<img src="/eccommerce/admin/uploads/sliders/${image}" class="img-thumbnail" style="max-width: 200px;">`;
+            document.getElementById('current_image').innerHTML = `<img src="/admin/uploads/sliders/${image}" class="img-thumbnail" style="max-width: 200px;">`;
         });
     });
 

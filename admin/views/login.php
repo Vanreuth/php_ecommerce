@@ -122,7 +122,7 @@ ini_set('display_errors', 1);
                     </div>
                 <?php endif; ?>
 
-                <form action="/eccommerce/admin/controllers/AuthController.php?action=login" method="post">
+                <form action="/admin/controllers/AuthController.php?action=login" method="post">
                     <div class="mb-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-envelope"></i></span>
