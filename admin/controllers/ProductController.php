@@ -52,7 +52,7 @@ class ProductController {
             }
 
             // Redirect back to the product management page
-            header('Location: /eccommerce/admin/?p=product');
+            header('Location: /admin/?p=product');
             exit;
         }
     }
@@ -227,7 +227,7 @@ class ProductController {
         while (ob_get_level()) {
             ob_end_clean();
         }
-        header("Location: /eccommerce/admin/index.php?p=product");
+        header("Location: /admin/index.php?p=product");
         exit();
     }
 

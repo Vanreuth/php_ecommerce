@@ -39,7 +39,7 @@ class UserController {
             }
 
             // Redirect back to the user management page
-            header('Location: /eccommerce/admin/?p=usermagement');
+            header('Location: /admin/?p=usermagement');
             exit;
         }
     }

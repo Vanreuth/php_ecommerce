@@ -38,7 +38,7 @@ class CategoryController {
             }
 
             // Redirect back to the category management page
-            header('Location: /eccommerce/admin/?p=category');
+            header('Location: /admin/?p=category');
             exit;
         }
     }

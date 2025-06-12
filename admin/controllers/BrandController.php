@@ -38,7 +38,7 @@ class BrandController {
             }
 
             // Redirect back to the brand management page
-            header('Location: /eccommerce/admin/?p=brand');
+            header('Location: /admin/?p=brand');
             exit;
         }
 

@@ -39,7 +39,7 @@ class OrderController {
             }
 
             // Redirect back to the order management page
-            header('Location: /eccommerce/admin/?p=order');
+            header('Location: /admin/?p=order');
             exit;
         }
     }

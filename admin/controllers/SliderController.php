@@ -53,7 +53,7 @@ class SliderController {
                 $_SESSION['error'] = $e->getMessage();
             }
             // Redirect back to the slider management page
-            header('Location: /eccommerce/admin/?p=sliders');
+            header('Location: /admin/?p=sliders');
             exit;
         }
     }
