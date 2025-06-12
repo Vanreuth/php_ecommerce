@@ -31,7 +31,7 @@ $status_colors = [
 <div class="container-fluid px-4">
     <h1 class="mt-4">Order Management</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="/eccommerce/admin">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
         <li class="breadcrumb-item active">Orders</li>
     </ol>
 
@@ -113,7 +113,7 @@ $status_colors = [
                                             data-bs-toggle="modal" data-bs-target="#editOrderModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="/eccommerce/admin/controllers/OrderController.php" method="POST" class="d-inline delete-form">
+                                    <form action="/admin/controllers/OrderController.php" method="POST" class="d-inline delete-form">
                                         <input type="hidden" name="id" value="<?php echo $order['id']; ?>">
                                         <input type="hidden" name="action" value="delete">
                                         <button type="submit" class="btn btn-danger btn-sm">
@@ -134,7 +134,7 @@ $status_colors = [
 <div class="modal fade" id="addOrderModal" tabindex="-1" aria-labelledby="addOrderModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form action="/eccommerce/admin/controllers/OrderController.php" method="POST">
+            <form action="/admin/controllers/OrderController.php" method="POST">
                 <input type="hidden" name="action" value="add">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addOrderModalLabel">Add New Order</h5>
@@ -196,7 +196,7 @@ $status_colors = [
 <div class="modal fade" id="editOrderModal" tabindex="-1" aria-labelledby="editOrderModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form action="/eccommerce/admin/controllers/OrderController.php" method="POST">
+            <form action="/admin/controllers/OrderController.php" method="POST">
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="id" id="edit_id">
                 <div class="modal-header">
@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const detailsContainer = document.getElementById('orderDetails');
             
             try {
-                const response = await fetch(`/eccommerce/admin/controllers/OrderController.php?action=view&id=${id}`);
+                const response = await fetch(`/admin/controllers/OrderController.php?action=view&id=${id}`);
                 const data = await response.json();
                 
                 let html = `

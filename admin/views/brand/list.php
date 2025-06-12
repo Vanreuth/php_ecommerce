@@ -18,7 +18,7 @@ try {
 <div class="container-fluid px-4">
     <h1 class="mt-4">Brand Management</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="/eccommerce/admin">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
         <li class="breadcrumb-item active">Brands</li>
     </ol>
 
@@ -79,7 +79,7 @@ try {
                                             data-bs-toggle="modal" data-bs-target="#editBrandModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="/eccommerce/admin/controllers/BrandController.php" method="POST" class="d-inline delete-form">
+                                    <form action="/admin/controllers/BrandController.php" method="POST" class="d-inline delete-form">
                                         <input type="hidden" name="id" value="<?php echo $brand['id']; ?>">
                                         <input type="hidden" name="action" value="delete">
                                         <button type="submit" class="btn btn-danger btn-sm">
@@ -100,7 +100,7 @@ try {
 <div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addBrandModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/eccommerce/admin/controllers/BrandController.php" method="POST">
+            <form action="/admin/controllers/BrandController.php" method="POST">
                 <input type="hidden" name="action" value="add">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addBrandModalLabel">Add New Brand</h5>
@@ -129,7 +129,7 @@ try {
 <div class="modal fade" id="editBrandModal" tabindex="-1" aria-labelledby="editBrandModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/eccommerce/admin/controllers/BrandController.php" method="POST">
+            <form action="/admin/controllers/BrandController.php" method="POST">
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="id" id="edit_id">
                 <div class="modal-header">

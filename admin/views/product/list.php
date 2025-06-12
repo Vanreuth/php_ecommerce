@@ -24,7 +24,7 @@ try {
 <div class="container-fluid px-4">
     <h1 class="mt-4">Product Management</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="/eccommerce/admin">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
         <li class="breadcrumb-item active">Products</li>
     </ol>
 
@@ -106,7 +106,7 @@ try {
                                             data-bs-toggle="modal" data-bs-target="#editProductModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="/eccommerce/admin/controllers/ProductController.php" method="POST" class="d-inline delete-form">
+                                    <form action="/admin/controllers/ProductController.php" method="POST" class="d-inline delete-form">
                                         <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
                                         <input type="hidden" name="action" value="delete">
                                         <button type="submit" class="btn btn-danger btn-sm">
@@ -127,7 +127,7 @@ try {
 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/eccommerce/admin/controllers/ProductController.php" method="POST" enctype="multipart/form-data">
+            <form action="/admin/controllers/ProductController.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="add">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
@@ -191,7 +191,7 @@ try {
 <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/eccommerce/admin/controllers/ProductController.php" method="POST" enctype="multipart/form-data">
+            <form action="/admin/controllers/ProductController.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="id" id="edit_id">
                 <div class="modal-header">

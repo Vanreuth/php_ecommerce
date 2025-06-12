@@ -14,7 +14,7 @@ $categories = $categoryModel->getAllCategories();
 <div class="container-fluid px-4">
     <h1 class="mt-4">Category Management</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="/eccommerce/admin">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
         <li class="breadcrumb-item active">Categories</li>
     </ol>
 
@@ -73,7 +73,7 @@ $categories = $categoryModel->getAllCategories();
                                             data-bs-toggle="modal" data-bs-target="#editCategoryModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="/eccommerce/admin/controllers/CategoryController.php" method="POST" class="d-inline delete-form">
+                                    <form action="/admin/controllers/CategoryController.php" method="POST" class="d-inline delete-form">
                                         <input type="hidden" name="id" value="<?php echo $category['id']; ?>">
                                         <input type="hidden" name="action" value="delete">
                                         <button type="submit" class="btn btn-danger btn-sm">
@@ -94,7 +94,7 @@ $categories = $categoryModel->getAllCategories();
 <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/eccommerce/admin/controllers/CategoryController.php" method="POST">
+            <form action="/admin/controllers/CategoryController.php" method="POST">
                 <input type="hidden" name="action" value="add">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addCategoryModalLabel">Add New Category</h5>
@@ -123,7 +123,7 @@ $categories = $categoryModel->getAllCategories();
 <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/eccommerce/admin/controllers/CategoryController.php" method="POST">
+            <form action="/admin/controllers/CategoryController.php" method="POST">
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="id" id="edit_id">
                 <div class="modal-header">
